@@ -132,15 +132,28 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="img\satispay.jpeg" />
+    <Content Include="js\datatables-demo.js" />
+    <Content Include="js\datatables\dataTables.bootstrap4.css" />
+    <Content Include="js\datatables\dataTables.bootstrap4.js" />
+    <Content Include="js\datatables\dataTables.bootstrap4.min.css" />
+    <Content Include="js\datatables\dataTables.bootstrap4.min.js" />
+    <Content Include="js\datatables\jquery.dataTables.js" />
+    <Content Include="js\datatables\jquery.dataTables.min.js" />
     <Content Include="js\sb-admin-2.min.js" />
     <Content Include="Loggato\Animatori\Dettagli.aspx" />
+    <Content Include="Loggato\Animatori\Assegnazione.aspx" />
     <Content Include="Loggato\Animatori\Presenze.aspx" />
     <Content Include="Loggato\Animatori\Visualizzazione.aspx" />
     <Content Include="Loggato\Bambini\Presenze.aspx" />
     <Content Include="Loggato\Bambini\Dettagli.aspx" />
     <Content Include="Loggato\Bambini\Visualizzazione.aspx" />
+    <Content Include="Loggato\Centro\FuoriComune.aspx" />
+    <Content Include="Loggato\Centro\Dettagli.aspx" />
     <Content Include="Loggato\Index.aspx" />
     <Content Include="Loggato\NuovaIscrizione\NuovaIscrizione.aspx" />
+    <Content Include="Loggato\Segreteria\DettagliPersonale.aspx" />
+    <Content Include="Loggato\Segreteria\ElencoPersonale.aspx" />
+    <Content Include="Loggato\Segreteria\PagamentiIscrizioni.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Loggato\NuovaIscrizione\Pagamento.aspx" />
     <Content Include="Loggato\NuovaIscrizione\DatiBambini.aspx" />
@@ -236,6 +249,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="TempleteEmail\nuovoProfilo.html" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
@@ -254,6 +268,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="css\jquery.dataTables.min.css" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
@@ -306,7 +321,7 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="adoNet_sqlServer.cs" />
+    <Compile Include="App_Code\adoNet_sqlServer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -324,7 +339,7 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Cryptography.cs" />
+    <Compile Include="App_Code\Cryptography.cs" />
     <Compile Include="ForgotPassword.aspx.cs">
       <DependentUpon>ForgotPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -338,6 +353,13 @@
     </Compile>
     <Compile Include="Loggato\Animatori\Dettagli.aspx.designer.cs">
       <DependentUpon>Dettagli.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loggato\Animatori\Assegnazione.aspx.cs">
+      <DependentUpon>Assegnazione.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loggato\Animatori\Assegnazione.aspx.designer.cs">
+      <DependentUpon>Assegnazione.aspx</DependentUpon>
     </Compile>
     <Compile Include="Loggato\Animatori\Presenze.aspx.cs">
       <DependentUpon>Presenze.aspx</DependentUpon>
@@ -374,6 +396,20 @@
     <Compile Include="Loggato\Bambini\Visualizzazione.aspx.designer.cs">
       <DependentUpon>Visualizzazione.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Loggato\Centro\FuoriComune.aspx.cs">
+      <DependentUpon>FuoriComune.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loggato\Centro\FuoriComune.aspx.designer.cs">
+      <DependentUpon>FuoriComune.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loggato\Centro\Dettagli.aspx.cs">
+      <DependentUpon>Dettagli.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loggato\Centro\Dettagli.aspx.designer.cs">
+      <DependentUpon>Dettagli.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Loggato\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -394,6 +430,27 @@
     </Compile>
     <Compile Include="Loggato\NuovaIscrizione\NuovaIscrizione.aspx.designer.cs">
       <DependentUpon>NuovaIscrizione.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loggato\Segreteria\DettagliPersonale.aspx.cs">
+      <DependentUpon>DettagliPersonale.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loggato\Segreteria\DettagliPersonale.aspx.designer.cs">
+      <DependentUpon>DettagliPersonale.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loggato\Segreteria\ElencoPersonale.aspx.cs">
+      <DependentUpon>ElencoPersonale.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loggato\Segreteria\ElencoPersonale.aspx.designer.cs">
+      <DependentUpon>ElencoPersonale.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Loggato\Segreteria\PagamentiIscrizioni.aspx.cs">
+      <DependentUpon>PagamentiIscrizioni.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loggato\Segreteria\PagamentiIscrizioni.aspx.designer.cs">
+      <DependentUpon>PagamentiIscrizioni.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -465,6 +522,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Loggato\Gite\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

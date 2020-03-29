@@ -247,30 +247,14 @@ namespace GEstaR
 
         protected void termineIscrizione_Click(object sender, EventArgs e)
         {
+            string sql;
+            SqlCommand command;
+            adoNet adoNet = new adoNet();
             string[] idGenitori = new string[2];
 
             Genitore genitore1 = new Genitore(Request.Cookies["genitore1"].Value);
 
-            string sql = "INSERT INTO Genitori(nome, cognome, sesso, dataNascita, natoA, nazionalita, indirizzo, numeroCivico, idCitta, numeroTelefono, sosNumber, email) " +
-                "OUTPUT Inserted.id " +
-                "VALUES (@nome, @cognome, @sesso, @dataNascita, @natoA, @nazionalita, @indirizzo, @numeroCivico, @idCitta, @numeroTelefono, @sosNumber, @email);";
-            SqlCommand command = new SqlCommand();
-            command.CommandText = sql;
-            command.CommandType = CommandType.Text;
-            command.Parameters.AddWithValue("@nome", genitore1.nome);
-            command.Parameters.AddWithValue("@cognome", genitore1.cognome);
-            command.Parameters.AddWithValue("@sesso", genitore1.sesso);
-            command.Parameters.AddWithValue("@dataNascita", genitore1.dataNascita);
-            command.Parameters.AddWithValue("@natoA", genitore1.cittaNascita);
-            command.Parameters.AddWithValue("@nazionalita", genitore1.nazionalita);
-            command.Parameters.AddWithValue("@indirizzo", genitore1.indirizzo);
-            command.Parameters.AddWithValue("@numeroCivico", genitore1.numeroCivico);
-            command.Parameters.AddWithValue("@idCitta", genitore1.citta);
-            command.Parameters.AddWithValue("@numeroTelefono", genitore1.cellulare);
-            command.Parameters.AddWithValue("@sosNumber", true);
-            command.Parameters.AddWithValue("@email", genitore1.email);
-            adoNet adoNet = new adoNet();
-            idGenitori[0] = adoNet.eseguiScalar(command);
+            idGenitori[0] = addGenitore(genitore1);
             Request.Cookies.Remove("genitore1");
 
             Genitore genitore2;
@@ -279,103 +263,71 @@ namespace GEstaR
                 if (Request.Cookies["genitore2"].Value != null)
                 {
                     genitore2 = new Genitore(Request.Cookies["genitore2"].Value);
-                    sql = "INSERT INTO Genitori(nome, cognome, sesso, dataNascita, natoA, nazionalita, indirizzo, numeroCivico, idCitta, numeroTelefono, sosNumber, email) " +
-                     "OUTPUT Inserted.id " +
-                     "VALUES (@nome, @cognome, @sesso, @dataNascita, @natoA, @nazionalita, @indirizzo, @numeroCivico, @idCitta, @numeroTelefono, @sosNumber, @email);";
-                    command = new SqlCommand();
-                    command.CommandText = sql;
-                    command.CommandType = CommandType.Text;
-                    command.Parameters.AddWithValue("@nome", genitore2.nome);
-                    command.Parameters.AddWithValue("@cognome", genitore2.cognome);
-                    command.Parameters.AddWithValue("@sesso", genitore2.sesso);
-                    command.Parameters.AddWithValue("@dataNascita", genitore2.dataNascita);
-                    command.Parameters.AddWithValue("@natoA", genitore2.cittaNascita);
-                    command.Parameters.AddWithValue("@nazionalita", genitore2.nazionalita);
-                    command.Parameters.AddWithValue("@indirizzo", genitore2.indirizzo);
-                    command.Parameters.AddWithValue("@numeroCivico", genitore2.numeroCivico);
-                    command.Parameters.AddWithValue("@idCitta", genitore2.citta);
-                    command.Parameters.AddWithValue("@numeroTelefono", genitore2.cellulare);
-                    command.Parameters.AddWithValue("@sosNumber", true);
-                    command.Parameters.AddWithValue("@email", genitore2.email);
-                    adoNet = new adoNet();
-                    idGenitori[1] = adoNet.eseguiScalar(command);
+                    idGenitori[1] = addGenitore(genitore2);
                     Request.Cookies.Remove("genitore2");
                 }
             }
             catch (Exception ex) { }
-            int n = 0;
+            string idBambini = "";
+
             for (int k = 0; k <= Request.Cookies.Count; k++)
             {
                 try
                 {
                     if (Request.Cookies["bambino" + k].Value != null)
-                        n++;
+                    {
+                        Bambino newBambino = new Bambino();
+                        newBambino.readCookie(Request.Cookies["bambino" + k].Value);
+                        sql = "INSERT INTO Bambini(nome, cognome, sesso, dataNascita, natoA, CF, nazionalita, indirizzo, numeroCivico, idCitta) " +
+                        "OUTPUT Inserted.id " +
+                        "VALUES (@nome, @cognome, @sesso, @dataNascita, @natoA, @CF, @nazionalita, @indirizzo, @numeroCivico, @idCitta);";
+                        command = new SqlCommand();
+                        command.CommandText = sql;
+                        command.CommandType = CommandType.Text;
+                        command.Parameters.AddWithValue("@nome", newBambino.nome);
+                        command.Parameters.AddWithValue("@cognome", newBambino.cognome);
+                        command.Parameters.AddWithValue("@sesso", newBambino.sesso);
+                        command.Parameters.AddWithValue("@dataNascita", newBambino.dataNascita);
+                        command.Parameters.AddWithValue("@natoA", newBambino.cittaNascita);
+                        command.Parameters.AddWithValue("@CF", newBambino.CF);
+                        command.Parameters.AddWithValue("@nazionalita", newBambino.nazionalita);
+                        command.Parameters.AddWithValue("@indirizzo", newBambino.indirizzo);
+                        command.Parameters.AddWithValue("@numeroCivico", newBambino.numeroCivico);
+                        command.Parameters.AddWithValue("@idCitta", newBambino.citta);
+                        adoNet = new adoNet();
+                        string idBambino = adoNet.eseguiScalar(command);
+
+                        for (int j = 0; j < newBambino.turni.GetLength(0); j++)
+                        {
+                            if (Convert.ToInt32(newBambino.turni[j, 0]) != 0)
+                            {
+                                sql = "INSERT INTO FreqBambini(idTurno, idBambino, settimane, dataIscrizione, servizioMensa, scuola, idClasse, pagato) " +
+                                    "OUTPUT Inserted.id" +
+                                "VALUES(@idTurno, @idBambino, @settimane, @dataIscrizione, @servizioMensa, @scuola, @idClasse, 0);";
+                                command = new SqlCommand();
+                                command.CommandText = sql;
+                                command.CommandType = CommandType.Text;
+                                command.Parameters.AddWithValue("@idTurno", newBambino.turni[j, 0]);
+                                command.Parameters.AddWithValue("@idBambino", idBambino);
+                                command.Parameters.AddWithValue("@settimane", getStringTurno(newBambino.turni, j));
+                                command.Parameters.AddWithValue("@dataIscrizione", DateTime.Now);
+                                command.Parameters.AddWithValue("@servizioMensa", newBambino.turni[j, 1]);
+                                command.Parameters.AddWithValue("@scuola", newBambino.scuola);
+                                command.Parameters.AddWithValue("@idClasse", newBambino.classe);
+                                string idIscrizione = adoNet.eseguiScalar(command);
+                                idBambini += idIscrizione + ",";
+                            }
+                        }
+                        addParentela(idBambino, idGenitori[0]);
+                        if (idGenitori[1] != null)
+                            addParentela(idBambino, idGenitori[1]);
+
+                        Request.Cookies.Remove("bambino" + k);
+                    }
                 }
                 catch (Exception ex) { }
             }
 
-            string idBambini = "";
-            for (int i = 0; i < n; i++)
-            {
-                Bambino newBambino = new Bambino();
-                newBambino.readCookie(Request.Cookies["bambino" + (i + 1)].Value);
-                sql = "INSERT INTO Bambini(nome, cognome, sesso, dataNascita, natoA, CF, nazionalita, indirizzo, numeroCivico, idCitta) " +
-                "OUTPUT Inserted.id " +
-                "VALUES (@nome, @cognome, @sesso, @dataNascita, @natoA, @CF, @nazionalita, @indirizzo, @numeroCivico, @idCitta);";
-                command = new SqlCommand();
-                command.CommandText = sql;
-                command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("@nome", newBambino.nome);
-                command.Parameters.AddWithValue("@cognome", newBambino.cognome);
-                command.Parameters.AddWithValue("@sesso", newBambino.sesso);
-                command.Parameters.AddWithValue("@dataNascita", newBambino.dataNascita);
-                command.Parameters.AddWithValue("@natoA", newBambino.cittaNascita);
-                command.Parameters.AddWithValue("@CF", newBambino.CF);
-                command.Parameters.AddWithValue("@nazionalita", newBambino.nazionalita);
-                command.Parameters.AddWithValue("@indirizzo", newBambino.indirizzo);
-                command.Parameters.AddWithValue("@numeroCivico", newBambino.numeroCivico);
-                command.Parameters.AddWithValue("@idCitta", newBambino.citta);
-                adoNet = new adoNet();
-                string idBambino = adoNet.eseguiScalar(command);
-
-                for (int j = 0; j < newBambino.turni.GetLength(0); j++)
-                {
-                    if (Convert.ToInt32(newBambino.turni[j, 0]) != 0)
-                    {
-                        sql = "INSERT INTO FreqBambini(idTurno, idBambino, settimane, dataIscrizione, servizioMensa, scuola, idClasse, pagato) " +
-                            "OUTPUT Inserted.id" +
-                        "VALUES(@idTurno, @idBambino, @settimane, @dataIscrizione, @servizioMensa, @scuola, @idClasse, 0);";
-                        command = new SqlCommand();
-                        command.CommandText = sql;
-                        command.CommandType = CommandType.Text;
-                        command.Parameters.AddWithValue("@idTurno", newBambino.turni[j, 0]);
-                        command.Parameters.AddWithValue("@idBambino", idBambino);
-                        command.Parameters.AddWithValue("@settimane", getStringTurno(newBambino.turni, j));
-                        command.Parameters.AddWithValue("@dataIscrizione", DateTime.Now);
-                        command.Parameters.AddWithValue("@servizioMensa", newBambino.turni[j, 1]);
-                        command.Parameters.AddWithValue("@scuola", newBambino.scuola);
-                        command.Parameters.AddWithValue("@idClasse", newBambino.classe);
-                        string idIscrizione = adoNet.eseguiScalar(command);
-                        idBambini += idIscrizione + ",";
-                    }
-                }
-                if (idGenitori[1] != null)
-                    sql = "INSERT INTO Parentele(idBambino, idGen1, idGen2) " +
-                       "VALUES(@idBambino, @idGen1, @idGen2);";
-                else
-                    sql = "INSERT INTO Parentele(idBambino, idGen1) " +
-                   "VALUES(@idBambino, @idGen1);";
-                command = new SqlCommand();
-                command.CommandText = sql;
-                command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("@idBambino", idBambino);
-                command.Parameters.AddWithValue("@idGen1", idGenitori[0]);
-                if (idGenitori[1] != null)
-                    command.Parameters.AddWithValue("@idGen2", idGenitori[1]);
-                adoNet.eseguiNonQuery(command);
-
-                Request.Cookies.Remove("bambino" + (i + 1));
-            }
             sql = "INSERT INTO pagamentiQuote(totale, pagato, metodo, idIscrizioni) " +
                         "VALUES(@totale, @pagato, @metodo, @idIscrizioni);";
             command = new SqlCommand();
@@ -396,7 +348,41 @@ namespace GEstaR
             return s;
         }
 
-    }
+        private string addGenitore(Genitore genitore1)
+        {
+            string sql = "INSERT INTO Genitori(nome, cognome, sesso, indirizzo, numeroCivico, idCitta, numeroTelefono1, descrizioneNT1, numeroTelefono2, descrizioneNT2,  numeroTelefono3, descrizioneNT3, email) " +
+               "OUTPUT Inserted.id " +
+               "VALUES (@nome, @cognome, @sesso, @indirizzo, @numeroCivico, @idCitta, @NT1, @DNT1, @NT2, @DNT2, @NT3, @DNT3, @email);";
+            SqlCommand command = new SqlCommand();
+            command.CommandText = sql;
+            command.CommandType = CommandType.Text;
+            command.Parameters.AddWithValue("@nome", genitore1.nome);
+            command.Parameters.AddWithValue("@cognome", genitore1.cognome);
+            command.Parameters.AddWithValue("@sesso", genitore1.sesso);
+            command.Parameters.AddWithValue("@indirizzo", genitore1.indirizzo);
+            command.Parameters.AddWithValue("@numeroCivico", genitore1.numeroCivico);
+            command.Parameters.AddWithValue("@idCitta", genitore1.citta);
+            command.Parameters.AddWithValue("@NT1", genitore1.cellulare[0, 0]);
+            command.Parameters.AddWithValue("@DNT1", genitore1.cellulare[0, 1]);
+            command.Parameters.AddWithValue("@NT2", genitore1.cellulare[1, 0]);
+            command.Parameters.AddWithValue("@DNT2", genitore1.cellulare[1, 1]);
+            command.Parameters.AddWithValue("@NT3", genitore1.cellulare[2, 0]);
+            command.Parameters.AddWithValue("@DNT3", genitore1.cellulare[2, 1]);
+            command.Parameters.AddWithValue("@email", genitore1.email);
+            adoNet adoNet = new adoNet();
+            return adoNet.eseguiScalar(command);
+        }
 
+        private void addParentela(string idBambino, string idGenitore)
+        {
+            string sql = "INSERT INTO ParenteleBambini(idBambino, idGenitore) " +
+                   "VALUES(@idBambino, @idGenitore);";
+            SqlCommand command = new SqlCommand();
+            command.CommandText = sql;
+            command.CommandType = CommandType.Text;
+            command.Parameters.AddWithValue("@idBambino", idBambino);
+            command.Parameters.AddWithValue("@idGen1", idGenitore);
+        }
+    }
 
 }

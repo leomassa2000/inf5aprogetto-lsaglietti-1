@@ -38,6 +38,8 @@ namespace GEstaR
                           "~/Content/bootstrap.css",
                           "~/Content/font-awesome.css",
                           "~/Content/site.css"));
+
+            
         }
     }
 }

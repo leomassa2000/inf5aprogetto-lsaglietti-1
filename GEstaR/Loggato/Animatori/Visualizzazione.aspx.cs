@@ -11,6 +11,16 @@ namespace GEstaR.Loggato.Animatori
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "UpdateMsg", "$(document).ready(function(){$('#MainContent_tableAnimatori').DataTable();});", true);
+        }
+
+        protected void btnAggiungi_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("./Dettagli.aspx?type=0");
+        }
+
+        protected void btnCerca_Click(object sender, EventArgs e)
+        {
 
         }
     }

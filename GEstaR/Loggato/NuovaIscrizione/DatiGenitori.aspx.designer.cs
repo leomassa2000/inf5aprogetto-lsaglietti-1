@@ -69,60 +69,6 @@ namespace GEstaR
         protected global::System.Web.UI.WebControls.DropDownList sessoGenitore1;
 
         /// <summary>
-        /// Controllo nazionalitaGenitore1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList nazionalitaGenitore1;
-
-        /// <summary>
-        /// Controllo nazionalitaGenitore1R.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator nazionalitaGenitore1R;
-
-        /// <summary>
-        /// Controllo dataNascitaGenitore1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dataNascitaGenitore1;
-
-        /// <summary>
-        /// Controllo dataNascitaGenitore1R.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator dataNascitaGenitore1R;
-
-        /// <summary>
-        /// Controllo cittaNascitaGenitore1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cittaNascitaGenitore1;
-
-        /// <summary>
-        /// Controllo cittaNascitaGenitore1R.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator cittaNascitaGenitore1R;
-
-        /// <summary>
         /// Controllo indirizzoGenitore1.
         /// </summary>
         /// <remarks>
@@ -195,31 +141,76 @@ namespace GEstaR
         protected global::System.Web.UI.WebControls.RequiredFieldValidator cittaGenitore1E;
 
         /// <summary>
-        /// Controllo cellulareGenitore1.
+        /// Controllo cellulare1Genitore1.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cellulareGenitore1;
+        protected global::System.Web.UI.WebControls.TextBox cellulare1Genitore1;
 
         /// <summary>
-        /// Controllo cellulareGenitore1R.
+        /// Controllo cellulare1Genitore1R.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator cellulareGenitore1R;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator cellulare1Genitore1R;
 
         /// <summary>
-        /// Controllo sosGenitore1.
+        /// Controllo DescrCellulare1Genitore1.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox sosGenitore1;
+        protected global::System.Web.UI.WebControls.TextBox DescrCellulare1Genitore1;
+
+        /// <summary>
+        /// Controllo DescrCellulare1Genitore1R.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator DescrCellulare1Genitore1R;
+
+        /// <summary>
+        /// Controllo cellulare2Genitore1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox cellulare2Genitore1;
+
+        /// <summary>
+        /// Controllo DescrCellulare2Genitore1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DescrCellulare2Genitore1;
+
+        /// <summary>
+        /// Controllo cellulare3Genitore1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox cellulare3Genitore1;
+
+        /// <summary>
+        /// Controllo DescrCellulare3Genitore1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DescrCellulare3Genitore1;
 
         /// <summary>
         /// Controllo emailGenitore1.
@@ -312,60 +303,6 @@ namespace GEstaR
         protected global::System.Web.UI.WebControls.DropDownList sessoGenitore2;
 
         /// <summary>
-        /// Controllo nazionalitaGenitore2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList nazionalitaGenitore2;
-
-        /// <summary>
-        /// Controllo nazionalitaGenitore2R.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator nazionalitaGenitore2R;
-
-        /// <summary>
-        /// Controllo dataNascitaGenitore2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox dataNascitaGenitore2;
-
-        /// <summary>
-        /// Controllo dataNascitaGenitore2R.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator dataNascitaGenitore2R;
-
-        /// <summary>
-        /// Controllo cittaNascitaGenitore2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cittaNascitaGenitore2;
-
-        /// <summary>
-        /// Controllo cittaNascitaGenitore2R.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator cittaNascitaGenitore2R;
-
-        /// <summary>
         /// Controllo sameIndirizzoGenitori.
         /// </summary>
         /// <remarks>
@@ -447,31 +384,76 @@ namespace GEstaR
         protected global::System.Web.UI.WebControls.RequiredFieldValidator cittaGenitore2R;
 
         /// <summary>
-        /// Controllo cellulareGenitore2.
+        /// Controllo cellulare1Genitore2.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cellulareGenitore2;
+        protected global::System.Web.UI.WebControls.TextBox cellulare1Genitore2;
 
         /// <summary>
-        /// Controllo cellulareGenitore2R.
+        /// Controllo cellulare1Genitore2R.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator cellulareGenitore2R;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator cellulare1Genitore2R;
 
         /// <summary>
-        /// Controllo sosGenitore2.
+        /// Controllo DescrCellulare1Genitore2.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox sosGenitore2;
+        protected global::System.Web.UI.WebControls.TextBox DescrCellulare1Genitore2;
+
+        /// <summary>
+        /// Controllo DescrCellulare1Genitore2R.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator DescrCellulare1Genitore2R;
+
+        /// <summary>
+        /// Controllo cellulare2Genitore2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox cellulare2Genitore2;
+
+        /// <summary>
+        /// Controllo DescrCellulare2Genitore2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DescrCellulare2Genitore2;
+
+        /// <summary>
+        /// Controllo cellulare3Genitore2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox cellulare3Genitore2;
+
+        /// <summary>
+        /// Controllo DescrCellulare3Genitore2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DescrCellulare3Genitore2;
 
         /// <summary>
         /// Controllo emailGenitore2.
@@ -483,22 +465,22 @@ namespace GEstaR
         protected global::System.Web.UI.WebControls.TextBox emailGenitore2;
 
         /// <summary>
-        /// Controllo emailGenitore2C.
-        /// </summary>
-        /// <remarks>
-        /// Campo generato automaticamente.
-        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator emailGenitore2C;
-
-        /// <summary>
         /// Controllo emailGenitore2E.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator emailGenitore2E;
+        protected global::System.Web.UI.WebControls.CustomValidator emailGenitore2E;
+
+        /// <summary>
+        /// Controllo emailGenitore2R.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator emailGenitore2R;
 
         /// <summary>
         /// Controllo salvaDatiGenitore.

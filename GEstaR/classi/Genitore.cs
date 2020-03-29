@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,14 +11,11 @@ namespace GEstaR.classi
         public string nome;
         public string cognome;
         public char sesso;
-        public int nazionalita;
-        public DateTime dataNascita;
-        public int cittaNascita;
         public string indirizzo;
         public string numeroCivico;
         public string provincia;
         public int citta;
-        public string cellulare;
+        public string[,] cellulare = new string[3,2];
         public string email;
 
         public Genitore() { }
@@ -28,18 +26,20 @@ namespace GEstaR.classi
 
         public string writeCookie()
         {
-            return nome + "," +
+            string s = nome + "," +
                 cognome + "," +
                 sesso + "," +
-                nazionalita + "," +
-                dataNascita.ToShortDateString() + "," +
-                cittaNascita + "," +
                 indirizzo + "," +
                 numeroCivico + "," +
                 provincia + "," +
                 citta + "," +
-                cellulare + "," +
-                email;
+                email + ",";
+            for (int i = 0; i < cellulare.GetLength(0); i++)
+            {
+                s += "[" + cellulare[i, 0] + ":" + cellulare[i, 1] + "],";
+            }
+
+            return s;
         }
 
         public void readCookie(string cookie)
@@ -48,15 +48,16 @@ namespace GEstaR.classi
             nome = vDati[0];
             cognome = vDati[1];
             sesso = Convert.ToChar(vDati[2]);
-            nazionalita = Convert.ToInt32(vDati[3]);
-            dataNascita = Convert.ToDateTime(vDati[4]);
-            cittaNascita = Convert.ToInt32(vDati[5]);
-            indirizzo = vDati[6];
-            numeroCivico = vDati[7];
-            provincia = vDati[8];
-            citta = Convert.ToInt32(vDati[9]);
-            cellulare = vDati[10];
-            email = vDati[11];
+            indirizzo = vDati[3];
+            numeroCivico = vDati[4];
+            provincia = vDati[5];
+            citta = Convert.ToInt32(vDati[6]);
+            email = vDati[7];
+            for (int i = 0; i < vDati.Length - 7; i++)
+            {
+                cellulare[i, 0] = vDati[8 + i].Split(':')[0].Trim('[', ']');
+                cellulare[i, 1] = vDati[8 + i].Split(':')[1].Trim('[', ']');
+            }
         }
     }
 }

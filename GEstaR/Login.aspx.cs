@@ -65,16 +65,19 @@ namespace GEstaR
                         sql = @"select idCentro
                         from Turni
 inner join FreqBambini on idTurno = Turni.id
-inner join Parentele on FreqBambini.idBambino = Parentele.idBambino
-inner join Genitori on Genitori.id = Parentele.idGen1 OR Genitori.id = Parentele.idGen2
+inner join ParenteleBambini on FreqBambini.idBambino = ParenteleBambini.idBambino
+inner join Genitori on Genitori.id = ParenteleBambini.idGenitore
                         where Genitori.id = " + codiceG + " AND Turni.anno = " + DateTime.Now.Year;
                         codiceG = adoWeb.eseguiScalar(sql, CommandType.Text);
                         Session["idCentro"] = codiceG;
                         Session.Timeout = 180;
-                        Response.Redirect("./Loggato/Index.aspx");
+                        if (Request.UrlReferrer.ToString().Contains("Loggato"))
+                            Response.Redirect(Request.UrlReferrer.ToString());
+                        else
+                            Response.Redirect("./Loggato/Index.aspx");
                     }
                     else
-                        lblErrore.Text = "ATTENZIONE!!! Utente e password non validi";
+                        lblErrore.Text = "ATTENZIONE!!! Utente e/o password non validi";
                 }
                 else
                 {
@@ -83,7 +86,10 @@ inner join Genitori on Genitori.id = Parentele.idGen1 OR Genitori.id = Parentele
                     Session["id"] = codice.Rows[0]["Personale.id"];
                     Session["idCentro"] = codice.Rows[0]["idCentro"];
                     Session.Timeout = 180;
-                    Response.Redirect("./Loggato/Index.aspx");
+                    if (Request.UrlReferrer.ToString().Contains("Loggato"))
+                        Response.Redirect(Request.UrlReferrer.ToString());
+                    else
+                        Response.Redirect("./Loggato/Index.aspx");
                 }
             }
         }

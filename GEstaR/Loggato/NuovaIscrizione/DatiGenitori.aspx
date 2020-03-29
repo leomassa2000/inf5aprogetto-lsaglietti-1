@@ -1,4 +1,4 @@
-﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DatiGenitori.aspx.cs" Inherits="GEstaR.DatiGenitori" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DatiGenitori.aspx.cs" Inherits="GEstaR.DatiGenitori" %>
 
 <!DOCTYPE html>
 
@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Nuova Iscrizione - GEstaR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="~/css/sb-admin-2.min.css" />
     <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
@@ -19,8 +19,8 @@
 
 </head>
 <body>
-    <form id="form1" runat="server" class="backgoundImage" style="font-size:medium">
-    <script type="text/javascript" src="../js/jquery.js"></script>
+    <form id="form1" runat="server" class="backgoundImage" style="font-size: medium">
+        <script type="text/javascript" src="../js/jquery.js"></script>
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -78,24 +78,8 @@
                                         <asp:ListItem Value="A">Altro</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                                <div class="form-group col-6 col-lg-6">
-                                    <label for="nazionalitaGenitore1">Nazionalità:</label>
-                                    <asp:DropDownList Font-Size="Medium" runat="server" ID="nazionalitaGenitore1" CssClass="form-control"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="nazionalitaGenitore1R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="nazionalitaGenitore1"></asp:RequiredFieldValidator>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-6 col-lg-6">
-                                    <label for="dataNascitaGenitore1">Data di Nascita:</label>
-                                    <asp:TextBox Font-Size="Medium" TextMode="Date" ID="dataNascitaGenitore1" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="dataNascitaGenitore1R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="dataNascitaGenitore1"></asp:RequiredFieldValidator>
-                                </div>
-                                <div class="form-group col-6 col-lg-6">
-                                    <label for="cittaNascitaGenitore1">Città di Nascita:</label>
-                                    <asp:DropDownList Font-Size="Medium" ID="cittaNascitaGenitore1" CssClass="form-control" runat="server"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="cittaNascitaGenitore1R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="cittaNascitaGenitore1"></asp:RequiredFieldValidator>
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="form-group col-8 col-lg-8">
                                     <label for="indirizzoGenitore1">Indirizzo di residenza:</label>
@@ -122,20 +106,44 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-6 col-lg-6">
-                                    <label for="cellulareGenitore1">Cellulare:</label>
-                                    <asp:TextBox Font-Size="Medium" ID="cellulareGenitore1" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="cellulareGenitore1R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="cellulareGenitore1"></asp:RequiredFieldValidator>
-                                    <asp:CheckBox ID="sosGenitore1" runat="server" />Numero di emergenza
+                                    <label for="cellulare1Genitore1">Cellulare:</label>
+                                    <asp:TextBox Font-Size="Medium" ID="cellulare1Genitore1" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ForeColor="Red" ID="cellulare1Genitore1R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="cellulare1Genitore1"></asp:RequiredFieldValidator>
                                 </div>
-
                                 <div class="form-group col-6 col-lg-6">
+                                    <label for="DescrCellulare1Genitore1">Descrizione Cellulare:</label>
+                                    <asp:TextBox Font-Size="Medium" ID="DescrCellulare1Genitore1" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ForeColor="Red" ID="DescrCellulare1Genitore1R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="DescrCellulare1Genitore1"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6 col-lg-6">
+                                    <label for="cellulare2Genitore1">Cellulare:</label>
+                                    <asp:TextBox Font-Size="Medium" ID="cellulare2Genitore1" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="form-group col-6 col-lg-6">
+                                    <label for="DescrCellulare2Genitore1">Descrizione Cellulare:</label>
+                                    <asp:TextBox Font-Size="Medium" ID="DescrCellulare2Genitore1" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6 col-lg-6">
+                                    <label for="cellulare3Genitore1">Cellulare:</label>
+                                    <asp:TextBox Font-Size="Medium" ID="cellulare3Genitore1" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="form-group col-6 col-lg-6">
+                                    <label for="DescrCellulare3Genitore1">Descrizione Cellulare:</label>
+                                    <asp:TextBox Font-Size="Medium" ID="DescrCellulare3Genitore1" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12 col-lg-12">
                                     <label for="emailGenitore1">Email:</label>
                                     <asp:TextBox Font-Size="Medium" TextMode="Email" ID="emailGenitore1" CssClass="form-control" runat="server" AutoPostBack="true"></asp:TextBox>
                                     <asp:CustomValidator ForeColor="Red" ControlToValidate="emailGenitore1" ID="emailGenitore1C" OnServerValidate="emailGenitoreC_ServerValidate" runat="server" ErrorMessage="Email già inserita"></asp:CustomValidator>
                                     <asp:RequiredFieldValidator ForeColor="Red" ID="emailGenitore1R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="emailGenitore1"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -143,7 +151,7 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <asp:CheckBox ID="datiGenitore2" Checked="false" runat="server" AutoPostBack="true" OnCheckedChanged="datiGenitore2_CheckedChanged" />
+                        <asp:CheckBox ID="datiGenitore2" Checked="false" runat="server" AutoPostBack="true" OnCheckedChanged="datiGenitore2_CheckedChanged" />
 
                         <h6 class="m-0 font-weight-bold text-primary">Genitore 2</h6>
                     </div>
@@ -153,14 +161,13 @@
                             <div class="row">
                                 <div class="form-group col-lg-6">
                                     <label for="nomeGenitore2">Nome:</label>
-                                    <asp:TextBox Font-Size="Medium" ID="nomeGenitore2" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="nomeGenitore2" CssClass="form-control" Font-Size="Medium" runat="server" ValidateRequestMode="Enabled"></asp:TextBox>
                                     <asp:RequiredFieldValidator ForeColor="Red" ID="nomeGenitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="nomeGenitore2"></asp:RequiredFieldValidator>
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="cognomeGenitore2">Cognome:</label>
                                     <asp:TextBox Font-Size="Medium" ID="cognomeGenitore2" CssClass="form-control" runat="server"></asp:TextBox>
                                     <asp:RequiredFieldValidator ForeColor="Red" ID="cognomeGenitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="cognomeGenitore2"></asp:RequiredFieldValidator>
-
                                 </div>
                             </div>
                             <div class="row">
@@ -171,23 +178,6 @@
                                         <asp:ListItem Value="F">Femmina</asp:ListItem>
                                         <asp:ListItem Value="A">Altro</asp:ListItem>
                                     </asp:DropDownList>
-                                </div>
-                                <div class="form-group col-6 col-lg-6">
-                                    <label for="nazionalitaGenitore2">Nazionalità:</label>
-                                    <asp:DropDownList Font-Size="Medium" runat="server" ID="nazionalitaGenitore2" CssClass="form-control"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="nazionalitaGenitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="nazionalitaGenitore2"></asp:RequiredFieldValidator>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-6 col-lg-6">
-                                    <label for="dataNascitaGenitore2">Data di Nascita:</label>
-                                    <asp:TextBox Font-Size="Medium" TextMode="Date" ID="dataNascitaGenitore2" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="dataNascitaGenitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="dataNascitaGenitore2"></asp:RequiredFieldValidator>
-                                </div>
-                                <div class="form-group col-6 col-lg-6">
-                                    <label for="cittaNascitaGenitore2">Città di Nascita:</label>
-                                    <asp:DropDownList Font-Size="Medium" ID="cittaNascitaGenitore2" CssClass="form-control" runat="server"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="cittaNascitaGenitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="cittaNascitaGenitore2"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                             <div class="row form-group form-check-inline">
@@ -220,17 +210,42 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-6 col-lg-6">
-                                    <label for="cellulareGenitore2">Cellulare:</label>
-                                    <asp:TextBox Font-Size="Medium" ID="cellulareGenitore2" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="cellulareGenitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="cellulareGenitore2"></asp:RequiredFieldValidator>
-                                    <asp:CheckBox ID="sosGenitore2" runat="server" />Numero di emergenza
+                                    <label for="cellulare1Genitore2">Cellulare:</label>
+                                    <asp:TextBox Font-Size="Medium" OnTextChanged="cellulare1Genitore2_TextChanged" AutoPostBack="true" ID="cellulare1Genitore2" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ForeColor="Red" ID="cellulare1Genitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="cellulare1Genitore2"></asp:RequiredFieldValidator>
                                 </div>
-
                                 <div class="form-group col-6 col-lg-6">
+                                    <label for="DescrCellulare1Genitore2">Descrizione Cellulare:</label>
+                                    <asp:TextBox Font-Size="Medium" ID="DescrCellulare1Genitore2" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ForeColor="Red" ID="DescrCellulare1Genitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="DescrCellulare1Genitore2"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6 col-lg-6">
+                                    <label for="cellulare2Genitore2">Cellulare:</label>
+                                    <asp:TextBox Enabled="false" Font-Size="Medium" OnTextChanged="cellulare2Genitore2_TextChanged" AutoPostBack="true" ID="cellulare2Genitore2" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="form-group col-6 col-lg-6">
+                                    <label for="DescrCellulare2Genitore2">Descrizione Cellulare:</label>
+                                    <asp:TextBox Enabled="false" Font-Size="Medium" ID="DescrCellulare2Genitore2" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6 col-lg-6">
+                                    <label for="cellulare3Genitore2">Cellulare:</label>
+                                    <asp:TextBox Enabled="false" Font-Size="Medium" ID="cellulare3Genitore2" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                                <div class="form-group col-6 col-lg-6">
+                                    <label for="DescrCellulare3Genitore2">Descrizione Cellulare:</label>
+                                    <asp:TextBox Enabled="false" Font-Size="Medium" ID="DescrCellulare3Genitore2" CssClass="form-control" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-12 col-lg-12">
                                     <label for="emailGenitore2">Email:</label>
-                                    <asp:TextBox Font-Size="Medium" TextMode="Email" ID="emailGenitore2" CssClass="form-control" runat="server"></asp:TextBox>
-                                    <asp:CustomValidator ForeColor="Red" ID="emailGenitore2C" OnServerValidate="emailGenitoreC_ServerValidate" runat="server" ErrorMessage="Email già inserita"></asp:CustomValidator>
-                                    <asp:RequiredFieldValidator ForeColor="Red" ID="emailGenitore2E" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="emailGenitore2"></asp:RequiredFieldValidator>
+                                    <asp:TextBox Font-Size="Medium" TextMode="Email" ID="emailGenitore2" CssClass="form-control" runat="server" AutoPostBack="true"></asp:TextBox>
+                                    <asp:CustomValidator ForeColor="Red" ControlToValidate="emailGenitore2" ID="emailGenitore2E" OnServerValidate="emailGenitoreC_ServerValidate" runat="server" ErrorMessage="Email già inserita"></asp:CustomValidator>
+                                    <asp:RequiredFieldValidator ForeColor="Red" ID="emailGenitore2R" runat="server" ErrorMessage="Campo Obbligatorio" ControlToValidate="emailGenitore2"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +254,7 @@
                 <div class="row d-flex flex-row align-items-center justify-content-center">
                     <asp:Button runat="server" ID="salvaDatiGenitore" Font-Size="Medium" OnClick="salvaDatiGenitore_Click" CssClass="btn btn-primary" Text="Salva Dati" />
                 </div>
-                
+
             </div>
         </div>
     </form>

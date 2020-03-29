@@ -24,13 +24,22 @@ namespace GEstaR
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
 
         /// <summary>
+        /// Controllo sceltaTurno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList sceltaTurno;
+
+        /// <summary>
         /// Controllo sceltaBambino.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel sceltaBambino;
+        protected global::System.Web.UI.WebControls.DropDownList sceltaBambino;
 
         /// <summary>
         /// Controllo notifiche.

@@ -36,208 +36,217 @@ DROP TABLE [dbo].Regioni
 DROP TABLE [dbo].Nazioni
 GO
 CREATE TABLE [dbo].[Nazioni]
-  (
-  	[IdNazione] INT IDENTITY (1, 1) NOT NULL,
-  	[DescNazione] NVARCHAR(50) NOT NULL,
-  	[ValNazione] CHAR(1) NOT NULL,
-  	PRIMARY KEY ([IdNazione])
-  );
+(
+	[IdNazione] INT IDENTITY (1, 1) NOT NULL,
+	[DescNazione] NVARCHAR(50) NOT NULL,
+	[ValNazione] CHAR(1) NOT NULL,
+	PRIMARY KEY ([IdNazione])
+);
   
-  GO
+GO
+
+CREATE TABLE [dbo].[Regioni]
+(
+	[IdRegione] INT IDENTITY (1, 1) NOT NULL,
+	[DescRegione] NVARCHAR(50) NOT NULL,
+	[IdNazRegione] INT NOT NULL,
+	[ValRegione] CHAR(1) NOT NULL,
+	PRIMARY KEY ([IdRegione]),
+	CONSTRAINT [FK_Regioni_ToNazioni] FOREIGN KEY ([IdNazRegione]) REFERENCES [Nazioni]([IdNazione]),
+);
   
-  CREATE TABLE [dbo].[Regioni]
-  (
-  	[IdRegione] INT IDENTITY (1, 1) NOT NULL,
-  	[DescRegione] NVARCHAR(50) NOT NULL,
-  	[IdNazRegione] INT NOT NULL,
-  	[ValRegione] CHAR(1) NOT NULL,
-  	PRIMARY KEY ([IdRegione]),
-  	CONSTRAINT [FK_Regioni_ToNazioni] FOREIGN KEY ([IdNazRegione]) REFERENCES [Nazioni]([IdNazione]),
-  );
+GO
+
+CREATE TABLE [dbo].[Province]
+(
+	[IdProvincia] INT IDENTITY (1, 1) NOT NULL,
+	[DescProvincia] NVARCHAR(50) NOT NULL,
+	[IdRegProvincia] INT NOT NULL,
+	[CodProvincia] NVARCHAR(2) NOT NULL UNIQUE,
+	[ValProvincia] CHAR(1) NOT NULL,
+	PRIMARY KEY ([IdProvincia], [CodProvincia]),
+	CONSTRAINT [FK_Province_ToRegioni] FOREIGN KEY ([IdRegProvincia]) REFERENCES [Regioni]([IdRegione]),
+);
   
-  GO
+GO
+
+CREATE TABLE [dbo].[Citta]
+(
+	[IdCitta] int IDENTITY(1,1) NOT NULL,
+	[descri] nvarchar(50) NULL,
+	[cap] nvarchar(10) NULL,
+	[prov] nvarchar(2) NULL,
+	[cod_istat] nvarchar(10) NULL,
+	[cod_locrif] int NULL,
+	[sigla_naz] nvarchar(40) NULL,
+	[cod_catasto] nvarchar(4) NULL,
+	[cod_stato] nvarchar(4) NULL,
+	PRIMARY KEY CLUSTERED ([IdCitta] ASC),
+	CONSTRAINT [FK_Citta_ToProvince] FOREIGN KEY ([prov]) REFERENCES [Province]([CodProvincia])
+);
   
-  CREATE TABLE [dbo].[Province]
-  (
-  	[IdProvincia] INT IDENTITY (1, 1) NOT NULL,
-  	[DescProvincia] NVARCHAR(50) NOT NULL,
-  	[IdRegProvincia] INT NOT NULL,
-  	[CodProvincia] NVARCHAR(2) NOT NULL UNIQUE,
-  	[ValProvincia] CHAR(1) NOT NULL,
-  	PRIMARY KEY ([IdProvincia], [CodProvincia]),
-  	CONSTRAINT [FK_Province_ToRegioni] FOREIGN KEY ([IdRegProvincia]) REFERENCES [Regioni]([IdRegione]),
-  );
+GO
+
+CREATE TABLE Centri
+(
+	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	nome VARCHAR(100) NOT NULL,
+	indirizzo VARCHAR(150) NOT NULL,
+	numeroCivico VARCHAR(10) NOT NULL,
+	idCitta INT NOT NULL,
+	numeroTelefono VARCHAR(15) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	pwd VARCHAR(255) NOT NULL,
+	circolo BIT DEFAULT 0,
+	fuoriComune BIT DEFAULT 0,
+	ultimaModifica DATETIME DEFAULT GETDATE(),
+	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
+);
   
-  GO
+GO
+
+CREATE TABLE FuoriComune
+(
+	idCentro INT NOT NULL,
+	indirizzo VARCHAR(150),
+	idCitta INT NOT NULL,
+	civicoMin INT,
+	civicoMax INT,
+	FOREIGN KEY ([idCentro]) REFERENCES [dbo].[Centri] ([id]),
+	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
+)
+GO
+
+CREATE TABLE Bambini
+(
+	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL,
+	cognome VARCHAR(50) NOT NULL,
+	sesso CHAR NOT NULL,
+	dataNascita DATE NOT NULL,
+	natoA INT NOT NULL,
+	CF VARCHAR(16) NOT NULL,
+	nazionalita VARCHAR(150) NOT NULL,
+	indirizzo VARCHAR(150) NOT NULL,
+	numeroCivico VARCHAR(10) NOT NULL,
+	idCitta INT NOT NULL,
+	ultimaModifica DATETIME DEFAULT GETDATE(),
+	FOREIGN KEY ([natoA]) REFERENCES [dbo].[Citta] ([IdCitta]),
+	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
+)
   
-  CREATE TABLE [dbo].[Citta]
-  (
-  	[IdCitta] int IDENTITY(1,1) NOT NULL,
-  	[descri] nvarchar(50) NULL,
-  	[cap] nvarchar(10) NULL,
-  	[prov] nvarchar(2) NULL,
-  	[cod_istat] nvarchar(10) NULL,
-  	[cod_locrif] int NULL,
-  	[sigla_naz] nvarchar(40) NULL,
-  	[cod_catasto] nvarchar(4) NULL,
-  	[cod_stato] nvarchar(4) NULL,
-  	PRIMARY KEY CLUSTERED ([IdCitta] ASC),
-  	CONSTRAINT [FK_Citta_ToProvince] FOREIGN KEY ([prov]) REFERENCES [Province]([CodProvincia])
-  );
+GO
+
+CREATE TABLE Genitori
+(/*DA MODIFICARE*/
+	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL,
+	cognome VARCHAR(50) NOT NULL,
+	sesso CHAR,
+	indirizzo VARCHAR(150),
+	numeroCivico VARCHAR(10),
+	idCitta INT,
+	numeroTelefono1 VARCHAR(15) NOT NULL,
+	descrizioneNT1 VARCHAR(50),
+	numeroTelefono2 VARCHAR(15),
+	descrizioneNT2 VARCHAR(50),
+	numeroTelefono3 VARCHAR(15),
+	descrizioneNT3 VARCHAR(50),
+	email VARCHAR(50),
+	pwd VARCHAR(255),
+	ultimaModifica DATETIME DEFAULT GETDATE(),
+	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
+)
+
+GO
+
+CREATE TABLE Personale
+(
+	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL,
+	cognome VARCHAR(50) NOT NULL,
+	sesso CHAR NOT NULL,
+	dataNascita DATE NOT NULL,
+	natoA INT NOT NULL,
+	nazionalita VARCHAR(150) NOT NULL,
+	indirizzo VARCHAR(150) NOT NULL,
+	numeroCivico VARCHAR(10) NOT NULL,
+	idCitta INT NOT NULL,
+	numeroTelefono VARCHAR(15),
+	codTessera INT NOT NULL,
+	email VARCHAR(50),
+	pwd VARCHAR(255),
+	ultimaModifica DATETIME DEFAULT GETDATE(),
+	FOREIGN KEY ([natoA]) REFERENCES [dbo].[Citta] ([IdCitta]),
+	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
+)
+
+GO
+
+CREATE TABLE Bollatrici
+(
+	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY
+)
+
+CREATE TABLE ParenteleBambini
+(
+	idBambino INT NOT NULL,
+	idGenitore INT NOT NULL,
+	ultimaModifica DATETIME DEFAULT GETDATE(),
+	PRIMARY KEY(idBambino, idGenitore),
+	FOREIGN KEY ([idBambino]) REFERENCES [dbo].[Bambini] ([id]),
+	FOREIGN KEY ([idGenitore]) REFERENCES [dbo].[Genitori] ([id])
+)
+
+CREATE TABLE ParenteleAnimatori
+(
+	idAnimatore INT NOT NULL,
+	idGenitore INT NOT NULL,
+	ultimaModifica DATETIME DEFAULT GETDATE(),
+	PRIMARY KEY(idAnimatore, idGenitore),
+	FOREIGN KEY ([idAnimatore]) REFERENCES [dbo].[Personale] ([id]),
+	FOREIGN KEY ([idGenitore]) REFERENCES [dbo].[Genitori] ([id])
+)
   
-  GO
+GO
+
+CREATE TABLE Turni
+(
+	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	anno INT NOT NULL,
+	numero INT NOT NULL,
+	idCentro INT NOT NULL,
+	dataInizio DATE NOT NULL,
+	dataFine DATE NOT NULL,
+	numeroSettimane INT NOT NULL,
+	quotaAnimOra MONEY NOT NULL,
+	servizioMensa BIT NOT NULL,
+
+	p1 INT NOT NULL,
+	p1quotaBamb1 MONEY NOT NULL,
+	p1quotaBamb2 MONEY NOT NULL,
+	p1quotaBamb3 MONEY NOT NULL,
+
+	p2quotaBamb1 MONEY,
+	p2quotaBamb2 MONEY,
+	p2quotaBamb3 MONEY,
+
+	quotaFuoriComune MONEY,
+
+	costoBuonoPasto MONEY,
+	costo4BuoniPasto MONEY,
+	FOREIGN KEY ([idCentro]) REFERENCES [dbo].[Centri] ([id])
+)
   
-  CREATE TABLE Centri
-  (
-  	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-  	nome VARCHAR(100) NOT NULL,
-  	indirizzo VARCHAR(150) NOT NULL,
-  	numeroCivico VARCHAR(10) NOT NULL,
-  	idCitta INT NOT NULL,
-  	numeroTelefono VARCHAR(15) NOT NULL,
-  	email VARCHAR(50) NOT NULL,
-  	pwd VARCHAR(255) NOT NULL,
-  	circolo BIT DEFAULT 0,
-  	fuoriComune BIT DEFAULT 0,
-  	ultimaModifica DATETIME DEFAULT GETDATE(),
-  	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
-  );
-  
-  GO
-  
-  CREATE TABLE FuoriComune
-  (
-  	idCentro INT NOT NULL,
-  	indirizzo VARCHAR(150),
-  	idCitta INT NOT NULL,
-  	civicoMin INT,
-  	civicoMax INT,
-  	FOREIGN KEY ([idCentro]) REFERENCES [dbo].[Centri] ([id]),
-  	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
-  )
-  GO
-  
-  CREATE TABLE Bambini
-  (
-  	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-  	nome VARCHAR(50) NOT NULL,
-  	cognome VARCHAR(50) NOT NULL,
-  	sesso CHAR NOT NULL,
-  	dataNascita DATE NOT NULL,
-  	natoA INT NOT NULL,
-  	CF VARCHAR(16) NOT NULL,
-  	nazionalita VARCHAR(150) NOT NULL,
-  	indirizzo VARCHAR(150) NOT NULL,
-  	numeroCivico VARCHAR(10) NOT NULL,
-  	idCitta INT NOT NULL,
-  	ultimaModifica DATETIME DEFAULT GETDATE(),
-  	FOREIGN KEY ([natoA]) REFERENCES [dbo].[Citta] ([IdCitta]),
-  	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
-  )
-  
-  GO
-  
-  CREATE TABLE Genitori
-  (
-  	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-  	nome VARCHAR(50) NOT NULL,
-  	cognome VARCHAR(50) NOT NULL,
-  	sesso CHAR NOT NULL,
-  	dataNascita DATE NOT NULL,
-  	natoA INT NOT NULL,
-  	nazionalita VARCHAR(150) NOT NULL,
-  	indirizzo VARCHAR(150) NOT NULL,
-  	numeroCivico VARCHAR(10) NOT NULL,
-  	idCitta INT NOT NULL,
-  	numeroTelefono VARCHAR(15) NOT NULL,
-  	sosNumber BIT NOT NULL,
-  	email VARCHAR(50) NOT NULL,
-  	pwd VARCHAR(255),
-  	ultimaModifica DATETIME DEFAULT GETDATE(),
-  	FOREIGN KEY ([natoA]) REFERENCES [dbo].[Citta] ([IdCitta]),
-  	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
-  )
-  
-  GO
-  
-  CREATE TABLE Personale
-  (
-  	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-  	nome VARCHAR(50) NOT NULL,
-  	cognome VARCHAR(50) NOT NULL,
-  	sesso CHAR NOT NULL,
-  	dataNascita DATE NOT NULL,
-  	natoA INT NOT NULL,
-  	nazionalita VARCHAR(150) NOT NULL,
-  	indirizzo VARCHAR(150) NOT NULL,
-  	numeroCivico VARCHAR(10) NOT NULL,
-  	idCitta INT NOT NULL,
-  	numeroTelefono VARCHAR(15),
-  	codTessera INT NOT NULL,
-  	email VARCHAR(50),
-  	pwd VARCHAR(255),
-  	ultimaModifica DATETIME DEFAULT GETDATE(),
-  	FOREIGN KEY ([natoA]) REFERENCES [dbo].[Citta] ([IdCitta]),
-  	FOREIGN KEY ([idCitta]) REFERENCES [dbo].[Citta] ([IdCitta])
-  )
-  
-  GO
-  
-  CREATE TABLE Bollatrici
-  (
-  	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY
-  )
-  
-  CREATE TABLE Parentele
-  (
-  	idBambino INT NOT NULL,
-  	idGen1 INT NOT NULL,
-  	idGen2 INT,
-  	ultimaModifica DATETIME DEFAULT GETDATE(),
-  	FOREIGN KEY ([idBambino]) REFERENCES [dbo].[Bambini] ([id]),
-  	FOREIGN KEY ([idGen1]) REFERENCES [dbo].[Genitori] ([id]),
-  	FOREIGN KEY ([idGen2]) REFERENCES [dbo].[Genitori] ([id])
-  )
-  
-  GO
-  
-  CREATE TABLE Turni
-  (
-  	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-  	anno INT NOT NULL,
-  	numero INT NOT NULL,
-  	idCentro INT NOT NULL,
-  	dataInizio DATE NOT NULL,
-  	dataFine DATE NOT NULL,
-  	numeroSettimane INT NOT NULL,
-  	quotaAnimOra MONEY NOT NULL,
-  	servizioMensa BIT NOT NULL,
-  
-  	p1 INT NOT NULL,
-  	p1quotaBamb1 MONEY NOT NULL,
-  	p1quotaBamb2 MONEY NOT NULL,
-  	p1quotaBamb3 MONEY NOT NULL,
-  
-  	p2quotaBamb1 MONEY,
-  	p2quotaBamb2 MONEY,
-  	p2quotaBamb3 MONEY,
-  
-  	quotaFuoriComune MONEY,
-  
-  	costoBuonoPasto MONEY,
-  	costo4BuoniPasto MONEY,
-  	FOREIGN KEY ([idCentro]) REFERENCES [dbo].[Centri] ([id])
-  )
-  
-  GO
-  
-  CREATE TABLE Classi
-  (
-  	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-  	anno INT NOT NULL,
-  	ME CHAR NOT NULL
-  )
- 
+GO
+
+CREATE TABLE Classi
+(
+	id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	anno INT NOT NULL,
+	ME CHAR NOT NULL
+)
+
 CREATE TABLE FreqBambini
 (
 	idTurno INT NOT NULL,
@@ -402,6 +411,17 @@ CREATE TABLE LinkPasswordPersonale
 	PRIMARY KEY(idPersonale, dataRichiesta),
 	FOREIGN KEY ([idPersonale]) REFERENCES [dbo].[Personale] ([id]),
 )
+
+CREATE TABLE LinkPasswordCentri
+(
+	idCentro INT NOT NULL,
+	dataRichiesta DATETIME DEFAULT GETDATE(),
+	url VARCHAR(50) NOT NULL UNIQUE,
+	modifica BIT DEFAULT 0,
+	PRIMARY KEY(idCentro, dataRichiesta),
+	FOREIGN KEY ([idCentro]) REFERENCES [dbo].[Centri] ([id]),
+)
+
 CREATE TABLE BuoniPasto
 (
 	idBuonoPasto VARCHAR(25) NOT NULL PRIMARY KEY,
@@ -432,10 +452,12 @@ CREATE TABLE pagamentiQuote
 	dataPagamento DATETIME
 )
 
-CREATE TABLE RuoliPagine(
+CREATE TABLE RuoliPagine
+(
 	pageTitle VARCHAR(50) NOT NULL,
 	ruolo CHAR NOT NULL,
-	autorizzazione INT NOT NULL, --0: no, 1: controllo completo, 2: sola visualizzazione
+	autorizzazione INT NOT NULL,
+	--0: no, 1: controllo completo, 2: sola visualizzazione
 	PRIMARY KEY(pageTitle, ruolo),
 	FOREIGN KEY (ruolo) REFERENCES [dbo].[RuoliPersonale] ([id])
 )

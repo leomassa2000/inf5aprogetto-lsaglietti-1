@@ -29,25 +29,12 @@ namespace GEstaR
                 {
                     datiGenitore2_CheckedChanged(new object(), new EventArgs());
                     //adoNet.impostaConnessione();
+
+
                     string sql = @"select * 
-                        from Nazioni";
+                        from Province";
                     adoNet adoWeb = new adoNet();
                     DataTable codice = adoWeb.eseguiQuery(sql, CommandType.Text);
-                    nazionalitaGenitore1.DataSource = codice;
-                    nazionalitaGenitore1.DataTextField = "DescNazione";
-                    nazionalitaGenitore1.DataValueField = "IdNazione";
-                    nazionalitaGenitore1.DataBind();
-
-                    nazionalitaGenitore2.DataSource = codice;
-                    nazionalitaGenitore2.DataTextField = "DescNazione";
-                    nazionalitaGenitore2.DataValueField = "IdNazione";
-                    nazionalitaGenitore2.DataBind();
-
-
-                    sql = @"select * 
-                        from Province";
-                    adoWeb = new adoNet();
-                    codice = adoWeb.eseguiQuery(sql, CommandType.Text);
                     provinciaGenitore1.DataSource = codice;
                     provinciaGenitore1.DataTextField = "DescProvincia";
                     provinciaGenitore1.DataValueField = "CodProvincia";
@@ -59,44 +46,8 @@ namespace GEstaR
                     provinciaGenitore2.DataValueField = "CodProvincia";
                     provinciaGenitore2.DataBind();
                     provinciaGenitore2.SelectedIndex = -1;
-
-                    sql = @"select * 
-                        from Citta";
-                    adoWeb = new adoNet();
-                    codice = adoWeb.eseguiQuery(sql, CommandType.Text);
-                    cittaNascitaGenitore1.DataSource = codice;
-                    cittaNascitaGenitore1.DataTextField = "descri";
-                    cittaNascitaGenitore1.DataValueField = "IdCitta";
-                    cittaNascitaGenitore1.DataBind();
-
-                    cittaNascitaGenitore2.DataSource = codice;
-                    cittaNascitaGenitore2.DataTextField = "descri";
-                    cittaNascitaGenitore2.DataValueField = "IdCitta";
-                    cittaNascitaGenitore2.DataBind();
                 }
             }
-            //else if(provinciaGenitore1.SelectedIndex != -1)
-            //{
-            //    string sql = @"select * 
-            //            from Citta where prov = '" + provinciaGenitore1.SelectedValue + "'";
-            //    adoNet adoWeb = new adoNet();
-            //    DataTable codice = adoWeb.eseguiQuery(sql, CommandType.Text);
-            //    cittaGenitore1.DataSource = codice;
-            //    cittaGenitore1.DataTextField = "descri";
-            //    cittaGenitore1.DataValueField = "IdCitta";
-            //    cittaGenitore1.DataBind();
-            //}
-            //else if (provinciaGenitore2.SelectedIndex != -1)
-            //{
-            //    string sql = @"select * 
-            //            from Citta where prov = '" + provinciaGenitore2.SelectedValue + "'";
-            //    adoNet adoWeb = new adoNet();
-            //    DataTable codice = adoWeb.eseguiQuery(sql, CommandType.Text);
-            //    cittaGenitore2.DataSource = codice;
-            //    cittaGenitore2.DataTextField = "descri";
-            //    cittaGenitore2.DataValueField = "IdCitta";
-            //    cittaGenitore2.DataBind();
-            //}
         }
 
         protected void salvaDatiGenitore_Click(object sender, EventArgs e)
@@ -108,14 +59,22 @@ namespace GEstaR
                 genitore1.nome = nomeGenitore1.Text;
                 genitore1.cognome = cognomeGenitore1.Text;
                 genitore1.sesso = Convert.ToChar(sessoGenitore1.SelectedValue);
-                genitore1.nazionalita = Convert.ToInt32(nazionalitaGenitore1.SelectedValue);
-                genitore1.dataNascita = Convert.ToDateTime(dataNascitaGenitore1.Text);
-                genitore1.cittaNascita = Convert.ToInt32(cittaNascitaGenitore1.SelectedValue);
                 genitore1.indirizzo = indirizzoGenitore1.Text;
                 genitore1.numeroCivico = numeroCivicoGenitore1.Text;
                 genitore1.provincia = provinciaGenitore1.SelectedValue;
                 genitore1.citta = Convert.ToInt32(cittaGenitore1.SelectedValue);
-                genitore1.cellulare = cellulareGenitore1.Text;
+                genitore1.cellulare[0, 0] = cellulare1Genitore1.Text;
+                genitore1.cellulare[0, 1] = DescrCellulare1Genitore1.Text;
+                if (cellulare2Genitore1.Text != String.Empty)
+                {
+                    genitore1.cellulare[1, 0] = cellulare2Genitore1.Text;
+                    genitore1.cellulare[1, 1] = DescrCellulare2Genitore1.Text;
+                }
+                if (cellulare3Genitore1.Text != String.Empty)
+                {
+                    genitore1.cellulare[2, 0] = cellulare3Genitore1.Text;
+                    genitore1.cellulare[2, 1] = DescrCellulare3Genitore1.Text;
+                }
                 genitore1.email = emailGenitore1.Text;
                 Response.Cookies["genitore1"].Value = genitore1.writeCookie();
                 Response.Cookies["genitore1"].Expires = DateTime.Now.AddMinutes(30);
@@ -126,14 +85,22 @@ namespace GEstaR
                     genitore2.nome = nomeGenitore2.Text;
                     genitore2.cognome = cognomeGenitore2.Text;
                     genitore2.sesso = Convert.ToChar(sessoGenitore2.SelectedValue);
-                    genitore2.nazionalita = Convert.ToInt32(nazionalitaGenitore2.SelectedValue);
-                    genitore2.dataNascita = Convert.ToDateTime(dataNascitaGenitore2.Text);
-                    genitore2.cittaNascita = Convert.ToInt32(cittaNascitaGenitore2.SelectedValue);
                     genitore2.indirizzo = indirizzoGenitore2.Text;
                     genitore2.numeroCivico = numeroCivicoGenitore2.Text;
                     genitore2.provincia = provinciaGenitore2.SelectedValue;
                     genitore2.citta = Convert.ToInt32(cittaGenitore2.SelectedValue);
-                    genitore2.cellulare = cellulareGenitore2.Text;
+                    genitore2.cellulare[0, 0] = cellulare1Genitore2.Text;
+                    genitore2.cellulare[0, 1] = DescrCellulare1Genitore2.Text;
+                    if (cellulare2Genitore2.Text != String.Empty)
+                    {
+                        genitore2.cellulare[1, 0] = cellulare2Genitore2.Text;
+                        genitore2.cellulare[1, 1] = DescrCellulare2Genitore2.Text;
+                    }
+                    if (cellulare3Genitore2.Text != String.Empty)
+                    {
+                        genitore2.cellulare[2, 0] = cellulare3Genitore2.Text;
+                        genitore2.cellulare[2, 1] = DescrCellulare3Genitore2.Text;
+                    }
                     genitore2.email = emailGenitore2.Text;
                     Response.Cookies["genitore2"].Value = genitore2.writeCookie();
                     Response.Cookies["genitore2"].Expires = DateTime.Now.AddMinutes(30);
@@ -156,9 +123,17 @@ namespace GEstaR
                "WHERE email = '" + args.Value + "'";
                 ris = adoNet.eseguiScalar(sql, CommandType.Text);
                 if (Convert.ToInt32(ris) == 0)
-                    args.IsValid = true; //ok
-                else
-                    args.IsValid = false; //ko
+                {
+                    sql = "SELECT COUNT(*) " +
+                    "FROM Centri " +
+                    "WHERE email = '" + args.Value + "'";
+                    ris = adoNet.eseguiScalar(sql, CommandType.Text);
+                    if (Convert.ToInt32(ris) == 0)
+                        args.IsValid = true; //ok
+                    else
+                        args.IsValid = false; //ko
+                }
+
             }
             else
                 args.IsValid = false; //ko
@@ -214,13 +189,42 @@ namespace GEstaR
 
             nomeGenitore2R.Enabled = datiGenitore2.Checked;
             cognomeGenitore2R.Enabled = datiGenitore2.Checked;
-            dataNascitaGenitore2R.Enabled = datiGenitore2.Checked;
             indirizzoGenitore2R.Enabled = datiGenitore2.Checked;
             numeroCivicoGenitore2R.Enabled = datiGenitore2.Checked;
             cittaGenitore2R.Enabled = datiGenitore2.Checked;
-            cellulareGenitore2R.Enabled = datiGenitore2.Checked;
+            cellulare1Genitore2R.Enabled = datiGenitore2.Checked;
+            DescrCellulare1Genitore2.Enabled = datiGenitore2.Checked;
             emailGenitore2E.Enabled = datiGenitore2.Checked;
 
         }
+
+        protected void cellulare1Genitore2_TextChanged(object sender, EventArgs e)
+        {
+            if (cellulare1Genitore2.Text.Trim().Length != 0)
+            {
+                cellulare2Genitore2.Enabled = true;
+                DescrCellulare2Genitore2.Enabled = true;
+            }
+            else
+            {
+                cellulare2Genitore2.Enabled = false;
+                DescrCellulare2Genitore2.Enabled = false;
+            }
+        }
+
+        protected void cellulare2Genitore2_TextChanged(object sender, EventArgs e)
+        {
+            if (cellulare2Genitore2.Text.Trim().Length != 0)
+            {
+                cellulare3Genitore2.Enabled = true;
+                DescrCellulare3Genitore2.Enabled = true;
+            }
+            else
+            {
+                cellulare3Genitore2.Enabled = false;
+                DescrCellulare3Genitore2.Enabled = false;
+            }
+        }
+
     }
 }

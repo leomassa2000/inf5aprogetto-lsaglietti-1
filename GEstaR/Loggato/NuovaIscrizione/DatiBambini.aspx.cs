@@ -59,7 +59,7 @@ namespace GEstaR
                             indirizzoUguale.Visible = false;
                         }
                         string sql = @"select * 
-                        from Nazioni";
+                        from Nazioni ORDER BY DescNazione";
                         DataTable codice = adoWeb.eseguiQuery(sql, CommandType.Text);
                         nazionalitaBambino.DataSource = codice;
                         nazionalitaBambino.DataTextField = "DescNazione";
@@ -67,7 +67,7 @@ namespace GEstaR
                         nazionalitaBambino.DataBind();
 
                         sql = @"select * 
-                        from Province";
+                        from Province ORDER BY DescProvincia";
                         codice = adoWeb.eseguiQuery(sql, CommandType.Text);
                         provinciaBambino.DataSource = codice;
                         provinciaBambino.DataTextField = "DescProvincia";
@@ -75,11 +75,11 @@ namespace GEstaR
                         provinciaBambino.DataBind();
                         provinciaBambino.SelectedIndex = -1;
 
-                        sql = @"select * 
-                        from Citta";
+                        sql = @"select *, descri + ' (' + prov + ')' AS text
+                        from Citta ORDER BY descri"; 
                         codice = adoWeb.eseguiQuery(sql, CommandType.Text);
                         cittaNascitaBambino.DataSource = codice;
-                        cittaNascitaBambino.DataTextField = "descri";
+                        cittaNascitaBambino.DataTextField = "text";
                         cittaNascitaBambino.DataValueField = "IdCitta";
                         cittaNascitaBambino.DataBind();
 
